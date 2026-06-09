@@ -1,15 +1,13 @@
-hl.on("hyprland.start", function()
-	local t
-	t = hl.timer(function()
-		local sink = io.popen("wpctl status | awk '/Streams:/{s=1} s && /audio-src/{print $1; exit}'"):read("*l")
-		if sink then
-			local cmd = "wpctl set-volume " .. sink
-			hl.bind("CTRL + XF86AudioRaiseVolume", hl.dsp.exec_cmd(cmd .. " 5%+"), { locked = true, repeating = true })
-			hl.bind("CTRL + XF86AudioLowerVolume", hl.dsp.exec_cmd(cmd .. " 5%-"), { locked = true, repeating = true })
-			t:set_enabled(false)
-		end
-	end, { timeout = 5000, type = "repeat" })
-end)
+local t
+t = hl.timer(function()
+	local sink = io.popen("wpctl status | awk '/Streams:/{s=1} s && /audio-src/{print $1; exit}'"):read("*l")
+	if sink then
+		local cmd = "wpctl set-volume " .. sink
+		hl.bind("CTRL + XF86AudioRaiseVolume", hl.dsp.exec_cmd(cmd .. " 5%+"), { locked = true, repeating = true })
+		hl.bind("CTRL + XF86AudioLowerVolume", hl.dsp.exec_cmd(cmd .. " 5%-"), { locked = true, repeating = true })
+		t:set_enabled(false)
+	end
+end, { timeout = 5000, type = "repeat" })
 
 hl.bind(
 	"XF86AudioRaiseVolume",
