@@ -67,7 +67,9 @@ local menu = "wofi --show drun"
 -- hl.exec_cmd("waybar & hyprpaper & firefox")
 
 -- hl.exec_cmd("hyprpanel")
-hl.exec_cmd("waybar -c ~/.config/waybar/config.jsonc -s ~/.config/waybar/style.css")
+hl.on("hyprland.start", function()
+	hl.exec_cmd("waybar -c ~/.config/waybar/config.jsonc -s ~/.config/waybar/style.css")
+end)
 
 -- #############################
 -- ### ENVIRONMENT VARIABLES ###
