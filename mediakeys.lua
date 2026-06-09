@@ -56,6 +56,21 @@ hl.bind(
 	{ locked = true, repeating = true }
 )
 
+--#region kenisis
+hl.bind("XF86AudioNext", hl.dsp.exec_cmd("playerctl --player=spotify next"), { locked = true })
+hl.bind("XF86AudioPrev", hl.dsp.exec_cmd("playerctl --player=spotify previous"), { locked = true })
+hl.bind(
+	"XF86AudioRewind",
+	hl.dsp.exec_cmd("playerctl --player=spotify position 5-"),
+	{ locked = true, repeating = true }
+)
+hl.bind(
+	"XF86AudioForward",
+	hl.dsp.exec_cmd("playerctl --player=spotify position 5+"),
+	{ locked = true, repeating = true }
+)
+--#endregion
+
 -- hl.bind("XF86MonBrightnessUp", hl.dsp.exec_cmd("brightnessctl -e4 -n2 set 5%+"), { locked = true, repeating = true })
 -- hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("brightnessctl -e4 -n2 set 5%-"), { locked = true, repeating = true })
 -- hl.bind("XF86HomePage", hl.dsp.exec_cmd("playerctl --player=spotify volume 0.05-"), { locked = true, repeating = true })

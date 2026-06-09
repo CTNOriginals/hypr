@@ -20,22 +20,20 @@
 
 print("Hyprland loaded lua")
 
-local function safe_require(name)
+function Safe_require(name)
 	local ok, err = pcall(require, name)
 	if not ok then
 		hl.notification.create({
 			text = "Config error: " .. name .. " failed - " .. tostring(err),
-			timeout = 5000,
+			timeout = 10000,
 			color = "rgba(ff4444ee)",
 		})
 	end
 end
 
-safe_require("workspace")
-safe_require("mediakeys")
-safe_require("workspacekeys")
-safe_require("windowrules")
-safe_require("kenisis")
+Safe_require("workspace")
+Safe_require("mediakeys")
+Safe_require("windowrules")
 
 ------------------
 ---- MONITORS ----
