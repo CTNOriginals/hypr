@@ -1,13 +1,24 @@
+-- Get the wpctl music id:
+-- 1. Get client ID from pactl list clients (paragraph mode → find spotify → extract Client #82 → 82)
+-- 2. Get sink-input & node ID from pactl list sink-inputs (find Client: 82 → extract Sink Input #83 and object.id = "77")
+
 local t
 t = hl.timer(function()
-	local sink = io.popen("wpctl status | awk '/Streams:/{s=1} s && /audio-src/{print $1; exit}'"):read("*l")
+	local sink = io.popen("wpctl status | awk '/Streams:/{s=1} s && /Spotify/ && !/output_/ {print $1+0; exit}'")
+		:read("*l")
 	if sink then
 		local cmd = "wpctl set-volume " .. sink
 		hl.bind("CTRL + XF86AudioRaiseVolume", hl.dsp.exec_cmd(cmd .. " 5%+"), { locked = true, repeating = true })
 		hl.bind("CTRL + XF86AudioLowerVolume", hl.dsp.exec_cmd(cmd .. " 5%-"), { locked = true, repeating = true })
 		t:set_enabled(false)
+
+		hl.notification.create({
+			text = "Music sink found\nCommand set: '" .. tostring(cmd) .. "'",
+			timeout = 2000,
+			color = "rgba(00ccccee)",
+		})
 	end
-end, { timeout = 5000, type = "repeat" })
+end, { timeout = 2500, type = "repeat" })
 
 hl.bind(
 	"XF86AudioRaiseVolume",
