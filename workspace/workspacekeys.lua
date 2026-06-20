@@ -1,7 +1,7 @@
 local mainMod = "SUPER"
 local terminal = "alacritty"
 local fileManager = "dolphin"
-local menu = "wofi --show drun"
+local menu = "hyprlauncher"
 
 -- Example binds, see https://wiki.hypr.land/Configuring/Binds/ for more
 hl.bind(mainMod .. " + Q", hl.dsp.exec_cmd(terminal))
@@ -51,50 +51,27 @@ hl.bind(mainMod .. " + mouse_up", hl.dsp.focus({ workspace = "e-1" }))
 hl.bind(mainMod .. " + mouse:272", hl.dsp.window.drag(), { mouse = true })
 hl.bind(mainMod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
 
--- Switch workspaces with mainMod + [0-9]
-hl.bind(mainMod .. " + KP_End", hl.dsp.focus({ workspace = 1 }))
-hl.bind(mainMod .. " + KP_Down", hl.dsp.focus({ workspace = 2 }))
-hl.bind(mainMod .. " + KP_Next", hl.dsp.focus({ workspace = 3 }))
-hl.bind(mainMod .. " + KP_Left", hl.dsp.focus({ workspace = 4 }))
-hl.bind(mainMod .. " + KP_Begin", hl.dsp.focus({ workspace = 5 }))
-hl.bind(mainMod .. " + KP_Right", hl.dsp.focus({ workspace = 6 }))
-hl.bind(mainMod .. " + KP_Home", hl.dsp.focus({ workspace = 7 }))
-hl.bind(mainMod .. " + KP_Up", hl.dsp.focus({ workspace = 8 }))
-hl.bind(mainMod .. " + KP_Prior", hl.dsp.focus({ workspace = 9 }))
-hl.bind(mainMod .. " + KP_Insert", hl.dsp.focus({ workspace = 10 }))
+-- Workspace key definitions: { numpad_key, kenisis_key }
+-- NOTE: KP_Prior is used for ws 3 on the numpad row (KP_Next=3, KP_Prior=9).
+-- If your numpad labels differ (e.g. KP_9 instead of KP_Prior), adjust accordingly.
+local workspaces = {
+	{ key = "KP_End",    kenisis = "M" },
+	{ key = "KP_Down",   kenisis = "comma" },
+	{ key = "KP_Next",   kenisis = "period" },
+	{ key = "KP_Left",   kenisis = "J" },
+	{ key = "KP_Begin",  kenisis = "K" },
+	{ key = "KP_Right",  kenisis = "L" },
+	{ key = "KP_Home",   kenisis = "U" },
+	{ key = "KP_Up",     kenisis = "I" },
+	{ key = "KP_Prior",  kenisis = "O" },
+	{ key = "KP_Insert", kenisis = "bracketleft" },
+}
 
--- Move active window to a workspace with mainMod + SHIFT + [0-9]
-hl.bind(mainMod .. " + SHIFT + KP_End", hl.dsp.window.move({ workspace = 1 }))
-hl.bind(mainMod .. " + SHIFT + KP_Down", hl.dsp.window.move({ workspace = 2 }))
-hl.bind(mainMod .. " + SHIFT + KP_Next", hl.dsp.window.move({ workspace = 3 }))
-hl.bind(mainMod .. " + SHIFT + KP_Left", hl.dsp.window.move({ workspace = 4 }))
-hl.bind(mainMod .. " + SHIFT + KP_Begin", hl.dsp.window.move({ workspace = 5 }))
-hl.bind(mainMod .. " + SHIFT + KP_Right", hl.dsp.window.move({ workspace = 6 }))
-hl.bind(mainMod .. " + SHIFT + KP_Home", hl.dsp.window.move({ workspace = 7 }))
-hl.bind(mainMod .. " + SHIFT + KP_Up", hl.dsp.window.move({ workspace = 8 }))
-hl.bind(mainMod .. " + SHIFT + KP_Prior", hl.dsp.window.move({ workspace = 9 }))
-hl.bind(mainMod .. " + SHIFT + KP_Insert", hl.dsp.window.move({ workspace = 10 }))
-
---#region Kenisis
-hl.bind(mainMod .. " + M", hl.dsp.focus({ workspace = 1 }))
-hl.bind(mainMod .. " + comma", hl.dsp.focus({ workspace = 2 }))
-hl.bind(mainMod .. " + period", hl.dsp.focus({ workspace = 3 }))
-hl.bind(mainMod .. " + J", hl.dsp.focus({ workspace = 4 }))
-hl.bind(mainMod .. " + K", hl.dsp.focus({ workspace = 5 }))
-hl.bind(mainMod .. " + L", hl.dsp.focus({ workspace = 6 }))
-hl.bind(mainMod .. " + U", hl.dsp.focus({ workspace = 7 }))
-hl.bind(mainMod .. " + I", hl.dsp.focus({ workspace = 8 }))
-hl.bind(mainMod .. " + O", hl.dsp.focus({ workspace = 9 }))
-hl.bind(mainMod .. " + bracketleft", hl.dsp.focus({ workspace = 10 }))
-
-hl.bind(mainMod .. " + CTRL + M", hl.dsp.window.move({ workspace = 1 }))
-hl.bind(mainMod .. " + CTRL + comma", hl.dsp.window.move({ workspace = 2 }))
-hl.bind(mainMod .. " + CTRL + period", hl.dsp.window.move({ workspace = 3 }))
-hl.bind(mainMod .. " + CTRL + J", hl.dsp.window.move({ workspace = 4 }))
-hl.bind(mainMod .. " + CTRL + K", hl.dsp.window.move({ workspace = 5 }))
-hl.bind(mainMod .. " + CTRL + L", hl.dsp.window.move({ workspace = 6 }))
-hl.bind(mainMod .. " + CTRL + U", hl.dsp.window.move({ workspace = 7 }))
-hl.bind(mainMod .. " + CTRL + I", hl.dsp.window.move({ workspace = 8 }))
-hl.bind(mainMod .. " + CTRL + O", hl.dsp.window.move({ workspace = 9 }))
-hl.bind(mainMod .. " + CTRL + bracketleft", hl.dsp.window.move({ workspace = 10 }))
---#endregion
+for i, ws in ipairs(workspaces) do
+	-- numpad row: switch workspace / move window to workspace
+	hl.bind(mainMod .. " + " .. ws.key, hl.dsp.focus({ workspace = i }))
+	hl.bind(mainMod .. " + SHIFT + " .. ws.key, hl.dsp.window.move({ workspace = i }))
+	-- kenisis row: switch workspace / move window to workspace
+	hl.bind(mainMod .. " + " .. ws.kenisis, hl.dsp.focus({ workspace = i }))
+	hl.bind(mainMod .. " + CTRL + " .. ws.kenisis, hl.dsp.window.move({ workspace = i }))
+end
