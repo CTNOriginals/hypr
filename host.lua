@@ -3,7 +3,7 @@ local hostname = f:read("*l")
 f:close()
 _G.HOST = hostname
 
-local ok = pcall(require, "hosts.default")
+local ok, defaultTable = pcall(require, "hosts.default")
 if not ok then
 	hl.notification.create({
 		text = "FATAL: hosts/default.lua missing",
@@ -12,6 +12,17 @@ if not ok then
 	})
 	error("Missing hosts/default.lua")
 end
+HOST_VARS = defaultTable
 
-pcall(require, "hosts." .. hostname)
-print("Host config loaded for '" .. hostname .. "'")
+local ok2, override = pcall(require, "hosts." .. hostname)
+if type(override) == "table" then
+	for k, v in pairs(override) do
+		HOST_VARS[k] = v
+	end
+end
+
+hl.notification.create({
+	text = "Host configs loaded for: " .. hostname,
+	timeout = 2500,
+	color = "rgba(00ffaaee)",
+})

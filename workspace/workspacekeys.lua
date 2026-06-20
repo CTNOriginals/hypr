@@ -51,27 +51,8 @@ hl.bind(mainMod .. " + mouse_up", hl.dsp.focus({ workspace = "e-1" }))
 hl.bind(mainMod .. " + mouse:272", hl.dsp.window.drag(), { mouse = true })
 hl.bind(mainMod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
 
--- Workspace key definitions: { numpad_key, kenisis_key }
--- NOTE: KP_Prior is used for ws 3 on the numpad row (KP_Next=3, KP_Prior=9).
--- If your numpad labels differ (e.g. KP_9 instead of KP_Prior), adjust accordingly.
-local workspaces = {
-	{ key = "KP_End",    kenisis = "M" },
-	{ key = "KP_Down",   kenisis = "comma" },
-	{ key = "KP_Next",   kenisis = "period" },
-	{ key = "KP_Left",   kenisis = "J" },
-	{ key = "KP_Begin",  kenisis = "K" },
-	{ key = "KP_Right",  kenisis = "L" },
-	{ key = "KP_Home",   kenisis = "U" },
-	{ key = "KP_Up",     kenisis = "I" },
-	{ key = "KP_Prior",  kenisis = "O" },
-	{ key = "KP_Insert", kenisis = "bracketleft" },
-}
-
-for i, ws in ipairs(workspaces) do
+for i, key in ipairs(HOST_VARS.workspace.switchKeys) do
 	-- numpad row: switch workspace / move window to workspace
-	hl.bind(mainMod .. " + " .. ws.key, hl.dsp.focus({ workspace = i }))
-	hl.bind(mainMod .. " + SHIFT + " .. ws.key, hl.dsp.window.move({ workspace = i }))
-	-- kenisis row: switch workspace / move window to workspace
-	hl.bind(mainMod .. " + " .. ws.kenisis, hl.dsp.focus({ workspace = i }))
-	hl.bind(mainMod .. " + CTRL + " .. ws.kenisis, hl.dsp.window.move({ workspace = i }))
+	hl.bind(mainMod .. " + " .. key, hl.dsp.focus({ workspace = i }))
+	hl.bind(mainMod .. " + " .. HOST_VARS.workspace.moveKey .. " + " .. key, hl.dsp.window.move({ workspace = i }))
 end
