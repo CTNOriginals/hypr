@@ -51,8 +51,8 @@ hl.bind(mainMod .. " + mouse_up", hl.dsp.focus({ workspace = "e-1" }))
 hl.bind(mainMod .. " + mouse:272", hl.dsp.window.drag(), { mouse = true })
 hl.bind(mainMod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
 
-for i, key in ipairs(HOST_VARS.workspace.switchKeys) do
+for i, key in ipairs(HOST_VARS.workspaceSwitchKeys) do
 	-- numpad row: switch workspace / move window to workspace
 	hl.bind(mainMod .. " + " .. key, hl.dsp.focus({ workspace = i }))
-	hl.bind(mainMod .. " + " .. HOST_VARS.workspace.moveKey .. " + " .. key, hl.dsp.window.move({ workspace = i }))
+	hl.bind(mainMod .. " + " .. HOST_VARS.workspaceMoveKey .. " + " .. key, hl.dsp.window.move({ workspace = i }))
 end
