@@ -1,5 +1,5 @@
-local monprime = "DP-1"
-local monsecond = "DVI-I-1"
+local monprime = HOST_VARS.monPrimary
+local monsecond = HOST_VARS.monSecondary or HOST_VARS.monPrimary
 
 hl.workspace_rule({ workspace = "1", monitor = monprime })
 hl.workspace_rule({ workspace = "2", monitor = monprime })

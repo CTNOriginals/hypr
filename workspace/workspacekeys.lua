@@ -1,7 +1,7 @@
-local mainMod = "SUPER"
-local terminal = "alacritty"
-local fileManager = "dolphin"
-local menu = "hyprlauncher"
+local mainMod = HOST_VARS.mainMod
+local terminal = HOST_VARS.terminal
+local fileManager = HOST_VARS.fileManager
+local menu = HOST_VARS.menu
 
 -- Example binds, see https://wiki.hypr.land/Configuring/Binds/ for more
 hl.bind(mainMod .. " + Q", hl.dsp.exec_cmd(terminal))

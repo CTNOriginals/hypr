@@ -31,6 +31,7 @@ function Safe_require(name)
 	end
 end
 
+Safe_require("host")
 Safe_require("workspace")
 Safe_require("mediakeys")
 Safe_require("windowrules")
@@ -40,8 +41,10 @@ Safe_require("windowrules")
 ------------------
 
 -- See https://wiki.hypr.land/Configuring/Monitors/
-hl.monitor({ output = "DP-1", mode = "preferred", position = "0x0", scale = "auto" })
-hl.monitor({ output = "DVI-I-1", mode = "preferred", position = "1920x0", scale = "auto" })
+hl.monitor({ output = HOST_VARS.monPrimary, mode = "preferred", position = "0x0", scale = "auto" })
+if HOST_VARS.monSecondary then
+	hl.monitor({ output = HOST_VARS.monSecondary, mode = "preferred", position = "1920x0", scale = "auto" })
+end
 
 -------------------
 ---- MY PROGRAMS ----
@@ -49,9 +52,9 @@ hl.monitor({ output = "DVI-I-1", mode = "preferred", position = "1920x0", scale 
 
 -- See https://wiki.hypr.land/Configuring/Keywords/
 -- Set programs that you use
-local terminal = "alacritty"
-local fileManager = "dolphin"
-local menu = "hyprlauncher"
+local terminal = HOST_VARS.terminal
+local fileManager = HOST_VARS.fileManager
+local menu = HOST_VARS.menu
 
 -- #################
 -- ### AUTOSTART ###
@@ -347,3 +350,5 @@ hl.exec_cmd('gsettings set org.gnome.desktop.interface gtk-theme "adw-gtk3"') --
 -- for kde apps you need to install: sudo pacman -S qt5ct qt6ct kvantum kvantum breeze-icons
 -- you will need to set dark theme for qt apps from kde more difficult thans with gnome :D:
 hl.env("QT_QPA_PLATFORMTHEME", "qt6ct") -- for Qt apps
+
+Safe_require("host_overrides")
