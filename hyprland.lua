@@ -51,7 +51,7 @@ hl.monitor({ output = "DVI-I-1", mode = "preferred", position = "1920x0", scale 
 -- Set programs that you use
 local terminal = "alacritty"
 local fileManager = "dolphin"
-local menu = "wofi --show drun"
+local menu = "hyprlauncher"
 
 -- #################
 -- ### AUTOSTART ###
@@ -249,7 +249,7 @@ hl.config({
 		kb_layout = "us",
 		kb_variant = "",
 		kb_model = "",
-		kb_options = "caps:caps",
+		kb_options = "caps:swapescape",
 		kb_rules = "",
 
 		follow_mouse = 1,
@@ -288,10 +288,12 @@ hl.gesture({
 
 -- Example per-device config
 -- See https://wiki.hypr.land/Configuring/Keywords/#per-device-input-configs for more
-hl.device({
-	name = "logitech-wireless-keyboard-pid:4023",
-	kb_options = "caps:swapescape",
-})
+-- TODO: Set this override for the kenisis
+-- -- by putting the kenisis devicename in the namefield
+-- hl.device({
+-- 	name = "logitech-wireless-keyboard-pid:4023",
+-- 	kb_options = "caps:swapescape",
+-- })
 
 -- -------------------
 -- ### KEYBINDINGS ###
