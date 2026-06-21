@@ -4,12 +4,12 @@ local fileManager = HOST_VARS.fileManager
 local menu = HOST_VARS.menu
 
 -- Example binds, see https://wiki.hypr.land/Configuring/Binds/ for more
-hl.bind(mainMod .. " + Q", hl.dsp.exec_cmd(terminal))
+-- hl.bind(mainMod .. " + Q", hl.dsp.exec_cmd(terminal))
 hl.bind(mainMod .. " + T", hl.dsp.exec_cmd(terminal))
-hl.bind(mainMod .. " + C", hl.dsp.window.close())
+hl.bind(mainMod .. " + Q", hl.dsp.window.close())
 -- hl.bind(mainMod .. " + M", hl.dsp.exec_cmd("exit"))  -- exit
 hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager))
-hl.bind(mainMod .. " + V", hl.dsp.window.float({ action = "toggle" }))
+hl.bind(mainMod .. " + F", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mainMod .. " + R", hl.dsp.exec_cmd(menu))
 -- hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())  -- dwindle
 -- hl.bind(mainMod .. " + J", hl.dsp.layout("togglesplit"))  -- dwindle
@@ -38,10 +38,8 @@ hl.bind(mainMod .. " + up", hl.dsp.focus({ direction = "u" }))
 hl.bind(mainMod .. " + down", hl.dsp.focus({ direction = "d" }))
 
 -- Example special workspace (scratchpad)
-hl.bind(mainMod .. " + S", hl.dsp.workspace.toggle_special("magic"))
 hl.bind(mainMod .. " + Y", hl.dsp.workspace.toggle_special("magic"))
-hl.bind(mainMod .. " + CTRL + S", hl.dsp.window.move({ workspace = "special:magic" }))
-hl.bind(mainMod .. " + CTRL + Y", hl.dsp.window.move({ workspace = "special:magic" }))
+hl.bind(mainMod .. " + " .. HOST_VARS.workspaceMoveKey .. " + Y", hl.dsp.window.move({ workspace = "special:magic" }))
 
 -- Scroll through existing workspaces with mainMod + scroll
 hl.bind(mainMod .. " + mouse_down", hl.dsp.focus({ workspace = "e+1" }))
