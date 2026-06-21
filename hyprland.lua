@@ -268,6 +268,12 @@ hl.config({
 	},
 })
 
+-- See https://wiki.hypr.land/Configuring/Keywords/#per-device-input-configs for more
+hl.device({
+	name = "kinesis-corporation-adv360-pro-keyboard",
+	kb_options = "caps:caps",
+})
+
 -- Custom stuff
 -- https://wiki.hypr.land/Configuring/Variables/#cursor
 hl.config({
@@ -289,15 +295,6 @@ hl.gesture({
 	action = "workspace",
 })
 
--- Example per-device config
--- See https://wiki.hypr.land/Configuring/Keywords/#per-device-input-configs for more
--- TODO: Set this override for the kenisis
--- -- by putting the kenisis devicename in the namefield
--- hl.device({
--- 	name = "logitech-wireless-keyboard-pid:4023",
--- 	kb_options = "caps:swapescape",
--- })
-
 -- -------------------
 -- ### KEYBINDINGS ###
 -- -------------------
@@ -311,7 +308,6 @@ hl.gesture({
 
 -- See https://wiki.hypr.land/Configuring/Window-Rules/ for more
 -- See https://wiki.hypr.land/Configuring/Workspace-Rules/ for workspace rules
-
 -- Example windowrule
 -- hl.window_rule({
 --   name = "float-kitty",
