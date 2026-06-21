@@ -132,10 +132,10 @@ hl.window_rule({
 -- https://wiki.hypr.land/Configuring/Variables/#general
 hl.config({
 	general = {
-		gaps_in = 5,
-		gaps_out = 10,
+		gaps_in = HOST_VARS.gapsIn,
+		gaps_out = HOST_VARS.gapsOut,
 
-		border_size = 1,
+		border_size = HOST_VARS.borderSize,
 
 		-- https://wiki.hypr.land/Configuring/Variables/#variable-types for info about colors
 		col = {

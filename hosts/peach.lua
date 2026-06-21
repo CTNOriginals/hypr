@@ -1,4 +1,4 @@
----@type HostVarsOverride
+---@type HostVars
 return {
 	mainMod = "CTRL + SHIFT",
 	monPrimary = "eDP-1",
