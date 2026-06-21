@@ -12,6 +12,7 @@ if not ok then
 	})
 	error("Missing hosts/default.lua")
 end
+---@type HostVars
 HOST_VARS = defaultTable
 
 local ok2, override = pcall(require, "hosts." .. hostname)

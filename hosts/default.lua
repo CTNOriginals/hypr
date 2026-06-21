@@ -1,3 +1,22 @@
+---@class HostVarsOverride
+---@field mainMod? string
+---@field terminal? string
+---@field fileManager? string
+---@field menu? string
+---@field monPrimary? string
+---@field monSecondary? string
+---@field workspaceSwitchKeys? string[]
+---@field workspaceMoveKey? string
+
+---@class HostVars
+---@field mainMod string
+---@field terminal string
+---@field fileManager string
+---@field menu string
+---@field monPrimary string
+---@field monSecondary string?
+---@field workspaceSwitchKeys string[]
+---@field workspaceMoveKey string
 HOST_VARS = {
 	mainMod = "SUPER",
 	terminal = "alacritty",
