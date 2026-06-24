@@ -4,6 +4,7 @@ return {
 	monPrimary = "DP-1",
 	monSecondary = "DVI-I-1",
 	workspaceMoveKey = "CTRL",
+	borderSize = 2,
 
 	workspaceSwitchKeys = {
 		"M",
